@@ -51,7 +51,7 @@ public class LinearEquationRunner {
             scan.nextLine();
             System.out.println("\nThe point on the line is (" + newX + ", " + (slope * newX + intercept) + ")");
         } else {
-            System.out.println("These points are on a verical line: " + "x = " + x1);
+            System.out.println("These points are on a vertical line: " + "x = " + x1);
         }
     }
 }
