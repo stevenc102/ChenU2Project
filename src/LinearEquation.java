@@ -15,29 +15,44 @@ public class LinearEquation {
         return (y2 - y1) / (x2 - x1);
     }
 
-    public double calculateIntercept() {
-        return y2 - (x1 * calculateSlope(x1, y1, x2, y2));
+    public String calculateIntercept() {
+        if (y2 - (x2 * calculateSlope(x1, y1, x2, y2)) < 0) {
+            return " - " + Math.abs((y2 - (x2 * calculateSlope(x1, y1, x2, y2))));
+        }
+        return " + " + (y2 - (x2 * calculateSlope(x1, y1, x2, y2)));
     }
 
     public double roundedToHundredth(double num) {
-        return Math.round(num);
+        return Math.round(num * 100) / 100.0;
+    }
+
+    public double calculateDistance() {
+        return roundedToHundredth(Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)));
     }
 
     public String returnEquation() {
         int temp = (int) calculateSlope(x1, y1, x2, y2);
+        if (calculateSlope(x1, y1, x2, y2) == 1){
+            return "y = " + "x" + calculateIntercept();
+        }
+
+        if (calculateSlope(x1, y1, x2, y2) == -1){
+            return "y = " + "-x" + calculateIntercept();
+        }
+
         if (calculateSlope(x1, y1, x2, y2) > temp) {
             if (calculateSlope(x1, y1, x2, y2) < 0) {
-                return "y = " + "-" + Math.abs(y2 - y1) + "/" + Math.abs(x2 - x1) + "x  + " + calculateIntercept();
+                return "y = " + "-" + (int) Math.abs(y2 - y1) + "/" + (int) Math.abs(x2 - x1) + "x" + calculateIntercept();
             }
-            return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x  + " + calculateIntercept();
+            return "y = " + (int) (y2 - y1) + "/" + (int) (x2 - x1) + "x" + calculateIntercept();
         }
         if (calculateSlope(x1, y1, x2, y2) == 0) {
             return "y = " + calculateIntercept();
         }
         if (calculateSlope(x1, y1, x2, y2) < 0) {
-            return "y = " + "-" + Math.abs(calculateSlope(x1,y1,x2,y2) + "x + " + calculateIntercept();
+            return "y = " + "-" + (int) Math.abs(calculateSlope(x1,y1,x2,y2)) + "x" + calculateIntercept();
         }
-        return "y = " + calculateSlope(x1, y1, x2, y2) + "x + " + calculateIntercept();
+        return "y = " + calculateSlope(x1, y1, x2, y2) + "x" + calculateIntercept();
     }
 
 
