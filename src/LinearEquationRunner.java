@@ -29,7 +29,6 @@ public class LinearEquationRunner {
 
         LinearEquation linearEq = new LinearEquation(x1,y1,x2,y2);
 
-        double intercept = 0;
         if (x2 - x1 != 0) {
             System.out.println("The two points are: (" + (int) x1 + ", " + (int) y1 + ")" + " and " + "(" + (int) x2 + ", " + (int) y2 + ")");
             System.out.println("The equation of the line between these points is " + linearEq.returnEquation());
@@ -37,10 +36,8 @@ public class LinearEquationRunner {
             double slope = linearEq.calculateSlope(x1, y1, x2, y2);
             if (linearEq.calculateIntercept().indexOf("-") != -1) {
                 System.out.println("The y-intercept of the line is: " + "-" + linearEq.calculateIntercept().substring(3));
-                intercept = -1 * Integer.parseInt(linearEq.calculateIntercept().substring(3, linearEq.calculateIntercept().length() - 2));
             } else {
                 System.out.println("The y-intercept of the line is: " + linearEq.calculateIntercept().substring(3));
-                intercept = Integer.parseInt(linearEq.calculateIntercept().substring(3, linearEq.calculateIntercept().length() - 2));
             }
             System.out.println("The distance between the two points is: " + linearEq.calculateDistance());
 
@@ -49,7 +46,7 @@ public class LinearEquationRunner {
             System.out.print("Enter a value for x: ");
             double newX = scan.nextDouble();
             scan.nextLine();
-            System.out.println("\nThe point on the line is (" + newX + ", " + (slope * newX + intercept) + ")");
+            System.out.println("\nThe point on the line is (" + newX + ", " + (slope * newX + (y2 - (x2 * linearEq.calculateSlope(x1, y1, x2, y2))) + ")"));
         } else {
             System.out.println("These points are on a vertical line: " + "x = " + x1);
         }
