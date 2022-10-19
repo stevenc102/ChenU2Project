@@ -17,9 +17,9 @@ public class LinearEquation {
 
     public String calculateIntercept() {
         if (y2 - (x2 * calculateSlope(x1, y1, x2, y2)) < 0) {
-            return " - " + Math.abs((y2 - (x2 * calculateSlope(x1, y1, x2, y2))));
+            return " - " + roundedToHundredth(Math.abs((y2 - (x2 * calculateSlope(x1, y1, x2, y2)))));
         }
-        return " + " + (y2 - (x2 * calculateSlope(x1, y1, x2, y2)));
+        return " + " + roundedToHundredth((y2 - (x2 * calculateSlope(x1, y1, x2, y2))));
     }
 
     public double roundedToHundredth(double num) {
@@ -32,31 +32,67 @@ public class LinearEquation {
 
     public String returnEquation() {
         int temp = (int) calculateSlope(x1, y1, x2, y2);
-        if (calculateSlope(x1, y1, x2, y2) == 1){
+        if (Double.parseDouble(calculateIntercept().substring(3)) == 0) {
+            if (calculateSlope(x1, y1, x2, y2) == 1) {
+                return "y = x";
+            }
+
+            if (calculateSlope(x1, y1, x2, y2) == -1) {
+                return "y = " + "-x";
+            }
+            if (calculateSlope(x1, y1, x2, y2) > 0) {
+                if (calculateSlope(x1, y1, x2, y2) > temp) {
+                    if (calculateSlope(x1, y1, x2, y2) < 0) {
+                        return "y = " + "-" + (int) Math.abs(y2 - y1) + "/" + (int) Math.abs(x2 - x1) + "x";
+                    }
+                    return "y = " + (int) (y2 - y1) + "/" + (int) (x2 - x1) + "x";
+                }
+            } else if (calculateSlope(x1, y1, x2, y2) < 0) {
+                if (calculateSlope(x1, y1, x2, y2) < temp) {
+                    if (calculateSlope(x1, y1, x2, y2) < 0) {
+                        return "y = " + "-" + (int) Math.abs(y2 - y1) + "/" + (int) Math.abs(x2 - x1) + "x" ;
+                    }
+                    return "y = " + (int) (y2 - y1) + "/" + (int) (x2 - x1) + "x";
+                }
+                if (calculateSlope(x1, y1, x2, y2) == 0) {
+                    return "y = 0";
+                }
+                if (calculateSlope(x1, y1, x2, y2) < 0) {
+                    return "y = " + "-" + (int) Math.abs(calculateSlope(x1, y1, x2, y2)) + "x";
+                }
+            }
+            return "y = " + calculateSlope(x1, y1, x2, y2) + "x";
+        }
+        if (calculateSlope(x1, y1, x2, y2) == 1) {
             return "y = " + "x" + calculateIntercept();
         }
 
-        if (calculateSlope(x1, y1, x2, y2) == -1){
+        if (calculateSlope(x1, y1, x2, y2) == -1) {
             return "y = " + "-x" + calculateIntercept();
         }
-
-        if (calculateSlope(x1, y1, x2, y2) > temp) {
-            if (calculateSlope(x1, y1, x2, y2) < 0) {
-                return "y = " + "-" + (int) Math.abs(y2 - y1) + "/" + (int) Math.abs(x2 - x1) + "x" + calculateIntercept();
+        if (calculateSlope(x1, y1, x2, y2) > 0) {
+            if (calculateSlope(x1, y1, x2, y2) > temp) {
+                if (calculateSlope(x1, y1, x2, y2) < 0) {
+                    return "y = " + "-" + (int) Math.abs(y2 - y1) + "/" + (int) Math.abs(x2 - x1) + "x" + calculateIntercept();
+                }
+                return "y = " + (int) (y2 - y1) + "/" + (int) (x2 - x1) + "x" + calculateIntercept();
             }
-            return "y = " + (int) (y2 - y1) + "/" + (int) (x2 - x1) + "x" + calculateIntercept();
-        }
-        if (calculateSlope(x1, y1, x2, y2) == 0) {
-            return "y = " + calculateIntercept();
-        }
-        if (calculateSlope(x1, y1, x2, y2) < 0) {
-            return "y = " + "-" + (int) Math.abs(calculateSlope(x1,y1,x2,y2)) + "x" + calculateIntercept();
+        } else if (calculateSlope(x1, y1, x2, y2) < 0) {
+            if (calculateSlope(x1, y1, x2, y2) < temp) {
+                if (calculateSlope(x1, y1, x2, y2) < 0) {
+                    return "y = " + "-" + (int) Math.abs(y2 - y1) + "/" + (int) Math.abs(x2 - x1) + "x" + calculateIntercept();
+                }
+                return "y = " + (int) (y2 - y1) + "/" + (int) (x2 - x1) + "x" + calculateIntercept();
+            }
+            if (calculateSlope(x1, y1, x2, y2) == 0) {
+                return "y = " + calculateIntercept();
+            }
+            if (calculateSlope(x1, y1, x2, y2) < 0) {
+                return "y = " + "-" + (int) Math.abs(calculateSlope(x1, y1, x2, y2)) + "x" + calculateIntercept();
+            }
+
         }
         return "y = " + calculateSlope(x1, y1, x2, y2) + "x" + calculateIntercept();
     }
-
-
-
-
 
 }

@@ -32,12 +32,12 @@ public class LinearEquationRunner {
         if (x2 - x1 != 0) {
             System.out.println("The two points are: (" + (int) x1 + ", " + (int) y1 + ")" + " and " + "(" + (int) x2 + ", " + (int) y2 + ")");
             System.out.println("The equation of the line between these points is " + linearEq.returnEquation());
-            System.out.println("The slope of this line is: " + linearEq.calculateSlope(x1, y1, x2, y2));
+            System.out.println("The slope of this line is: " + linearEq.roundedToHundredth(linearEq.calculateSlope(x1, y1, x2, y2)));
             double slope = linearEq.calculateSlope(x1, y1, x2, y2);
             if (linearEq.calculateIntercept().indexOf("-") != -1) {
-                System.out.println("The y-intercept of the line is: " + "-" + linearEq.calculateIntercept().substring(3));
+                System.out.println("The y-intercept of the line is: " + "-" + linearEq.roundedToHundredth(Double.parseDouble(linearEq.calculateIntercept().substring(3))));
             } else {
-                System.out.println("The y-intercept of the line is: " + linearEq.calculateIntercept().substring(3));
+                System.out.println("The y-intercept of the line is: " + linearEq.roundedToHundredth(Double.parseDouble(linearEq.calculateIntercept().substring(3))));
             }
             System.out.println("The distance between the two points is: " + linearEq.calculateDistance());
 
