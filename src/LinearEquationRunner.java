@@ -46,7 +46,7 @@ public class LinearEquationRunner {
 
         } else {
 
-            System.out.println("These points are on a vertical line: " + "x = " + x1);
+            System.out.println("These points are on a vertical line: " + "x = " + (int) x1);
         }
 
     }

@@ -39,28 +39,27 @@ public class LinearEquation {
             return "y = " + (int)calculateIntercept();
         }
         if (calculateSlope(x1,y1,x2,y2) == 1) {
-            if (isNegative) {
-                if (calculateIntercept() == 0) {
-                    return "y = x" + calculateSlope(x1,y1,x2,y2) + "x";
-                }
+            if (calculateIntercept() > 0) {
+                return "y = x + " + calculateIntercept();
+            }
+            if (calculateIntercept() < 0) {
                 return "y = x" + " - " + interceptAsString.substring(1);
             }
             if (calculateIntercept() == 0) {
                 return "y = x";
             }
-            return "y = x" + " + " + interceptAsString.substring(1);
+
         }
         if (calculateSlope(x1,y1,x2,y2) == -1) {
-            if (isNegative) {
-                if (calculateIntercept() == 0) {
-                    return "y = -x" + calculateSlope(x1,y1,x2,y2) + "x";
-                }
+            if (calculateIntercept() > 0) {
+                return "y = -x + " + calculateIntercept();
+            }
+            if (calculateIntercept() < 0) {
                 return "y = -x" + " - " + interceptAsString.substring(1);
             }
             if (calculateIntercept() == 0) {
                 return "y = -x";
             }
-            return "y = -x" + " + " + interceptAsString.substring(1);
         }
         if (calculateIntercept() == 0) {
             if (isDecimal) {
@@ -78,7 +77,7 @@ public class LinearEquation {
                 }
 
             }
-            return "y = " + calculateSlope(x1,y1,x2,y2) + "x";
+            return "y = " + (int) calculateSlope(x1,y1,x2,y2) + "x";
         }
         if (isDecimal) {
             if (y2 - y1 > 0 || x2 - x1 > 0) {
@@ -91,7 +90,7 @@ public class LinearEquation {
                 if (isNegativeSlope) {
                     return "y = -" + Math.abs((int) (y2 - y1)) + "/" + Math.abs((int) (x2 - x1)) + "x" + " + " + interceptAsString;
                 }
-                return "y = " + Math.abs((int) (y2 - y1)) + "/" + Math.abs((int) (x2 - x1)) + "x" + " + " + interceptAsString.substring(1);
+                return "y = " + Math.abs((int) (y2 - y1)) + "/" + Math.abs((int) (x2 - x1)) + "x" + " + " + interceptAsString;
             }
             if (isNegative) {
                 return "y = " + y.substring(1) + "/" + x.substring(1) + "x" + " - " + interceptAsString.substring(1);
