@@ -11,57 +11,62 @@ public class LinearEquation {
         this.y2 = y2;
     }
 
-    public double calculateSlope(double x1, double y1, double x2, double y2) {
+    public double slope(double x1, double y1, double x2, double y2) {
         return (y2 - y1) / (x2 - x1);
     }
 
-    public double calculateIntercept() {
-        return roundedToHundredth((y2 - (x2 * calculateSlope(x1, y1, x2, y2))));
+    public double yIntercept() {
+        return roundedToHundredth((y2 - (x2 * slope(x1, y1, x2, y2))));
     }
 
     public double roundedToHundredth(double num) {
         return Math.round(num * 100) / 100.0;
     }
 
-    public double calculateDistance() {
+    public double distance() {
         return roundedToHundredth(Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)));
     }
 
-    public String returnEquation() {
-        String interceptAsString = "" + calculateIntercept();
-        boolean isNegative = (calculateIntercept() < 0);
-        boolean isNegativeSlope = (calculateSlope(x1,y1,x2,y2) < 0);
-        int temp = (int) calculateSlope(x1,y1,x2,y2);
-        boolean isDecimal = (calculateSlope(x1,y1,x2,y2) > temp || calculateSlope(x1,y1,x2,y2) < temp);
+    public String equation() {
+        //set up for convenience
+        String interceptAsString = "" + yIntercept();
+        boolean isNegative = (yIntercept() < 0);
+        boolean isNegativeSlope = (slope(x1,y1,x2,y2) < 0);
+        int temp = (int) slope(x1,y1,x2,y2);
+        boolean isDecimal = (slope(x1,y1,x2,y2) > temp || slope(x1,y1,x2,y2) < temp);
         String y = "" + (int) (y2 - y1);
         String x = "" + (int) (x2 - x1);
-        if (calculateSlope(x1,y1,x2,y2) == 0) {
-            return "y = " + (int)calculateIntercept();
+        //tests for slope = 0
+        if (slope(x1,y1,x2,y2) == 0) {
+            return "y = " + (int)yIntercept();
         }
-        if (calculateSlope(x1,y1,x2,y2) == 1) {
-            if (calculateIntercept() > 0) {
-                return "y = x + " + calculateIntercept();
+        //tests for if slope is 1 and -1
+
+        if (slope(x1,y1,x2,y2) == 1) {
+            if (yIntercept() > 0) {
+                return "y = x + " + yIntercept();
             }
-            if (calculateIntercept() < 0) {
+            if (yIntercept() < 0) {
                 return "y = x" + " - " + interceptAsString.substring(1);
             }
-            if (calculateIntercept() == 0) {
+            if (yIntercept() == 0) {
                 return "y = x";
             }
 
         }
-        if (calculateSlope(x1,y1,x2,y2) == -1) {
-            if (calculateIntercept() > 0) {
-                return "y = -x + " + calculateIntercept();
+        if (slope(x1,y1,x2,y2) == -1) {
+            if (yIntercept() > 0) {
+                return "y = -x + " + yIntercept();
             }
-            if (calculateIntercept() < 0) {
+            if (yIntercept() < 0) {
                 return "y = -x" + " - " + interceptAsString.substring(1);
             }
-            if (calculateIntercept() == 0) {
+            if (yIntercept() == 0) {
                 return "y = -x";
             }
         }
-        if (calculateIntercept() == 0) {
+
+        if (yIntercept() == 0) {
             if (isDecimal) {
                 if (y2 - y1 > 0 || x2 - x1 > 0) {
                     if (isNegative) {
@@ -77,7 +82,7 @@ public class LinearEquation {
                 }
 
             }
-            return "y = " + (int) calculateSlope(x1,y1,x2,y2) + "x";
+            return "y = " + (int) slope(x1,y1,x2,y2) + "x";
         }
         if (isDecimal) {
             if (y2 - y1 > 0 || x2 - x1 > 0) {
@@ -98,8 +103,20 @@ public class LinearEquation {
             return "y = " + y.substring(1) + "/" + x.substring(1) + "x" + " + " + interceptAsString;
         }
         if (isNegative) {
-            return "y = " + (int) calculateSlope(x1,y1,x2,y2) + "x" + " - " + interceptAsString.substring(1);
+            return "y = " + (int) slope(x1,y1,x2,y2) + "x" + " - " + interceptAsString.substring(1);
         }
-        return "y = " + (int) calculateSlope(x1,y1,x2,y2) + "x" + " + " + interceptAsString;
+        return "y = " + (int) slope(x1,y1,x2,y2) + "x" + " + " + interceptAsString;
+
+    }
+    public String lineInfo() {
+        String info = "The two points are: (" + (int) x1 + ", " + (int) y1 + ")" + " and " + "(" + (int) x2 + ", " + (int) y2 + ")\n";
+        info += "The equation of the line between these points is " + equation();
+        info += "The slope of this line is: " + roundedToHundredth(slope(x1, y1, x2, y2));
+        info += "The y-intercept of the line is: " + yIntercept();
+        info += "The distance between the two points is: " + distance();
+        return info;
+    }
+    public String coordinateForX(double X) {
+        return "The point on the line is (" + X + ", " + (slope(x1,y1,x2,y2) * X + (y2 - (x2 * slope(x1, y1, x2, y2))) + ")");
     }
 }

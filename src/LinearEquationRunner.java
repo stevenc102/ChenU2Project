@@ -25,27 +25,19 @@ public class LinearEquationRunner {
         double x2 = Integer.parseInt(withoutPar2.substring(0, indexOfComma2 - 1));
         double y2 = Integer.parseInt(withoutPar2.substring(indexOfComma2 + 1));
 
+
         System.out.println("");
 
-        LinearEquation linearEq = new LinearEquation(x1,y1,x2,y2);
 
         if (x2 - x1 != 0) {
-            System.out.println("The two points are: (" + (int) x1 + ", " + (int) y1 + ")" + " and " + "(" + (int) x2 + ", " + (int) y2 + ")");
-            System.out.println("The equation of the line between these points is " + linearEq.returnEquation());
-            System.out.println("The slope of this line is: " + linearEq.roundedToHundredth(linearEq.calculateSlope(x1, y1, x2, y2)));
-            double slope = linearEq.calculateSlope(x1, y1, x2, y2);
-            System.out.println("The y-intercept of the line is: " + linearEq.calculateIntercept());
-            System.out.println("The distance between the two points is: " + linearEq.calculateDistance());
-
-            System.out.println("");
-
+            LinearEquation linearEq = new LinearEquation(x1,y1,x2,y2);
+            System.out.println(linearEq.lineInfo());
             System.out.print("Enter a value for x: ");
             double newX = scan.nextDouble();
             scan.nextLine();
-            System.out.println("\nThe point on the line is (" + newX + ", " + (slope * newX + (y2 - (x2 * linearEq.calculateSlope(x1, y1, x2, y2))) + ")"));
+            System.out.println(linearEq.coordinateForX(newX));
 
         } else {
-
             System.out.println("These points are on a vertical line: " + "x = " + (int) x1);
         }
 
