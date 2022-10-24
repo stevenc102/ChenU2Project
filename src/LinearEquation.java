@@ -28,7 +28,7 @@ public class LinearEquation {
     }
 
     public String equation() {
-        //set up for convenience
+        // set up for readability for the rest of the code
         String interceptAsString = "" + yIntercept();
         boolean isNegative = (yIntercept() < 0);
         boolean isNegativeSlope = (slope(x1,y1,x2,y2) < 0);
@@ -40,8 +40,9 @@ public class LinearEquation {
         if (slope(x1,y1,x2,y2) == 0) {
             return "y = " + (int)yIntercept();
         }
-        //tests for if slope is 1 and -1
 
+
+        //tests for if slope is 1 and -1
         if (slope(x1,y1,x2,y2) == 1) {
             if (yIntercept() > 0) {
                 return "y = x + " + yIntercept();
@@ -54,6 +55,8 @@ public class LinearEquation {
             }
 
         }
+
+
         if (slope(x1,y1,x2,y2) == -1) {
             if (yIntercept() > 0) {
                 return "y = -x + " + yIntercept();
@@ -66,6 +69,8 @@ public class LinearEquation {
             }
         }
 
+
+        // tests for a y-intercept of 0
         if (yIntercept() == 0) {
             if (isDecimal) {
                 if (y2 - y1 > 0 || x2 - x1 > 0) {
@@ -84,6 +89,9 @@ public class LinearEquation {
             }
             return "y = " + (int) slope(x1,y1,x2,y2) + "x";
         }
+
+
+        // checks for all instances with a decimal slope
         if (isDecimal) {
             if (y2 - y1 > 0 || x2 - x1 > 0) {
                 if (isNegative) {
@@ -108,6 +116,8 @@ public class LinearEquation {
         return "y = " + (int) slope(x1,y1,x2,y2) + "x" + " + " + interceptAsString;
 
     }
+
+    // prints the line info
     public String lineInfo() {
         String info = "The two points are: (" + (int) x1 + ", " + (int) y1 + ")" + " and " + "(" + (int) x2 + ", " + (int) y2 + ")\n";
         info += "The equation of the line between these points is " + equation();

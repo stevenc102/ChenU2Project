@@ -28,7 +28,7 @@ public class LinearEquationRunner {
 
         System.out.println("");
 
-
+        //checks for a vertical line
         if (x2 - x1 != 0) {
             LinearEquation linearEq = new LinearEquation(x1,y1,x2,y2);
             System.out.println(linearEq.lineInfo());
